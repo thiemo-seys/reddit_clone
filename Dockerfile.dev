@@ -1,0 +1,42 @@
+ARG RUBY_VERSION=3.3.0
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+
+RUN apt-get update && apt-get upgrade -y
+
+# Add local aliases
+RUN echo 'source /srv/.bashrc; if [ -f /srv/.local.bashrc ]; then source /srv/.local.bashrc; fi' > ~/.bashrc
+
+# Install dependencies to build gems
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    zlib1g-dev \
+    libssl-dev \
+    libreadline-dev \
+    libyaml-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libcurl4-openssl-dev \
+    libffi-dev \
+    libpq-dev
+
+ENV APP_HOME /srv
+
+# Create the app directory
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
+
+# Add Gemfile and Gemfile.lock
+ADD Gemfile* $APP_HOME/
+
+# Install application gems
+RUN gem update --system && gem install bundler
+RUN bundle config set path /usr/local/bundle
+RUN bundle install --jobs 4 --retry 5
+
+# Add the rest of the application files
+ADD . $APP_HOME
+
+ARG port=3000
+EXPOSE $port
+
+CMD ["bundle", "exec", "puma", "-p", "$port", "-C", "./config/puma.rb"]

@@ -1,0 +1,38 @@
+x-app: &app
+  build:
+    dockerfile: Dockerfile.dev
+    context: .
+  image: redit_clone/server
+  command: bundle exec puma -p 3000 -C ./config/puma.rb
+  volumes:
+    - .:/srv:cached
+    - rails_cache:/srv/tmp/cache
+    - bundle:/usr/local/bundle
+  tmpfs:
+    - /tmp
+  depends_on:
+    - postgres
+  env_file:
+    - .development.env
+
+
+services:
+  postgres:
+    image: postgres:16
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  web:
+    <<: *app
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres:
+  bundle:
+  rails_cache:
