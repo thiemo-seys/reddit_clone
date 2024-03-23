@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 users = [
   {
     email: "user1@rclone.com",
@@ -6,7 +8,7 @@ users = [
   {
     email: "user2@rclone.com",
     password: "password",
-  }
+  },
 ]
 
 users.each do |user|

@@ -2,7 +2,7 @@
 
 module Topics
   class Topic < ApplicationRecord
-    belongs_to :created_by, class_name: "User"
+    belongs_to :created_by, class_name: "Users::User"
   end
 end
 

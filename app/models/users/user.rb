@@ -12,7 +12,7 @@ module Users
            :timeoutable,
            :trackable
 
-    has_many :topics, class_name: "Topics::Topic", foreign_key: :created_by_id, dependent: :nullify
+    has_many :topics, class_name: "Topics::Topic", foreign_key: :created_by_id, inverse_of: :created_by, dependent: :nullify
   end
 end
 
