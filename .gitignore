@@ -39,3 +39,6 @@
 
 # local(personal) aliasses
 .local.bashrc
+
+# bash history
+.bash_history
