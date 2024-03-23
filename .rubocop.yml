@@ -1,0 +1,203 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - bin/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - db/schema.rb
+  TargetRubyVersion: 3.3
+
+Rails:
+  Enabled: true
+
+Rails/ApplicationRecord:
+  Enabled: true
+  Exclude:
+    - db/**/*.rb
+
+Rails/ActiveRecordOverride:
+  Enabled: false
+
+Rails/DotSeparatedKeys:
+  Enabled: false
+
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+
+# TODO: re-enable anonymous forwarding when https://github.com/rubocop/rubocop/issues/12571 is resolved
+Style/ArgumentsForwarding:
+  UseAnonymousForwarding: false
+
+Style/OpenStructUse:
+  Exclude:
+    - db/**/*.rb
+    - spec/**/*.rb
+
+Style/HashAsLastArrayItem:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/MultilineBlockChain:
+  Enabled: true
+
+Style/RedundantInitialize:
+  Enabled: true
+
+Style/TrivialAccessors:
+  ExactNameMatch: true
+  AllowDSLWriters: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+  AllowInnerSlashes: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    "%i": "()"
+    "%I": "()"
+    "%r": "()"
+    "%w": "()"
+    "%W": "()"
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: true
+
+Lint/ConstantDefinitionInBlock:
+  Exclude:
+    - db/seeds/**/*.rb
+    - spec/**/*.rb
+
+Lint/FlipFlop:
+  Enabled: false
+
+Lint/SafeNavigationWithEmpty:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+# TODO: reconfigure as 'anonymous' when https://github.com/rubocop/rubocop/issues/12571 is resolved
+Naming/BlockForwarding:
+  EnforcedStyle: explicit
+
+Naming/MethodName:
+  Enabled: true
+
+Performance/MethodObjectAsBlock:
+  Exclude:
+    - db/migrate/*.rb
+
+RSpec/DescribeClass:
+  Enabled: true
+
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/SpecFilePathSuffix:
+  Enabled: true
+
+RSpec/SpecFilePathFormat:
+  Enabled: true
+
+  CustomTransform:
+    RuboCop: rubocop
+    RSpec: rspec
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/ExpectChange:
+  EnforcedStyle: block
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+Performance/ArraySemiInfiniteRangeSlice:
+  Enabled: false
