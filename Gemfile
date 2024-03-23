@@ -55,7 +55,7 @@ group :development do
   # gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "spring"
 
   # annotate models and routes
   gem "annotate"
@@ -65,6 +65,9 @@ group :development do
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
+
+  # better model printing
+  gem "awesome_print"
 end
 
 group :test do
